@@ -1,18 +1,24 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Button } from "./Button"
 
 export default function InputControl() {
-    const [text, setText] = useState("")
-
+    const [text, setText] = useState("");
+    const [stringList, setStringList] = useState([]);
+    const inputRef = useRef(null);
 
     function handleOnChange(event) {
-        var isText = false;
-         isText = isNaN(event.target.value)
-        console.log(isText);
+        const inputValue = event.target.value;
+        const onlyLetters = /^[a-zA-Z]*$/;
 
-        if (isText) {
-            setText(event.target.value)
+        if (inputValue.match(onlyLetters)) {
+            setText(inputValue);
         }
+    }
+
+    function handleSubmit() {
+        setStringList([...stringList, text]);
+        setText("");
+        inputRef.current.focus();
     }
 
     return (
@@ -20,14 +26,21 @@ export default function InputControl() {
             <span>{text}</span>
             <br />
             <input
+                ref={inputRef}
                 className="inputControl"
                 value={text}
                 onChange={handleOnChange}
             />
             <br />
             <br />
-            <Button>Submit</Button>
-            {/* onClick={handleSubmit} */}
+            <Button onClick={handleSubmit} >Submit</Button>
+            <br />
+            <br />
+            <ul>
+                {stringList.map((item, index) => (
+                    <li key={index}>{item}</li>
+                ))}
+            </ul>
         </div>
     )
 }
