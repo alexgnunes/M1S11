@@ -34,3 +34,12 @@
   border: 0;
   margin: 0 5px 0 5px;
 }
+
+.inputControl{
+  font-size: 30px;
+  width: 300px;
+  padding: 16px 10px;
+  border-radius: 5px; 
+  border: 0;
+  margin: 0 5px 0 5px;
+}
