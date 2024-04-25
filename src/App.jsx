@@ -3,6 +3,7 @@ import { Button } from "./components/Button"
 import Input from "./components/Input"
 import ImportNews from "./components/ImportNews"
 import InputControl from "./components/InputControl"
+import Form from './components/Form'
 
 function App() {
   const [contador, setContador] = useState(0)
@@ -22,15 +23,19 @@ function App() {
   return (
     <>
       <div>
-        <Button onClick={decrementa} >-</Button>  
-        <Input>{contador}</Input> 
+        <Button onClick={decrementa} >-</Button>
+        <Input>{contador}</Input>
         <Button onClick={incrementa} >+</Button>
       </div>
       <div>
-        <ImportNews></ImportNews>
+        <ImportNews />
       </div>
       <div>
-        <InputControl></InputControl>
+        <InputControl />
+      </div>
+
+      <div>
+        <Form />
       </div>
     </>
   )
