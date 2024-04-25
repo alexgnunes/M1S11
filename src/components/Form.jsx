@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function Form() {
 
@@ -8,32 +8,47 @@ function Form() {
         idade: "",
     });
 
-    function handleINputNameChange(event) {
-        setFormValues({ ...formValues, nome: event.target.value });
-        if (formValues.nome !== '') {
-            validadeForm();
-        }
-    }
+    const [mensage, setMensage] = useState("Preencha todos os campos")
 
-    function handleINputEmailChange(event) {
-        setFormValues({ ...formValues, email: event.target.value });
-        if (formValues.nome !== '') {
-            validadeForm();
-        }
-    }
+    // function handleINputNameChange(event) {
+    //     setFormValues({ ...formValues, nome: event.target.value });
+    //     if (formValues.nome !== '') {
+    //         validadeForm();
+    //     }
+    // }
 
-    function handleINputIdadeChange(event) {
-        setFormValues({ ...formValues, idade: event.target.value });
-        if (formValues.idade !== '') {
-            validadeForm();
-        }
-    }
+    // function handleINputEmailChange(event) {
+    //     setFormValues({ ...formValues, email: event.target.value });
+    //     if (formValues.nome !== '') {
+    //         validadeForm();
+    //     }
+    // }
 
-    function validadeForm(){
-        if (formValues.nome !== '' && formValues.email !== '' && formValues.idade !== '') {
-            alert('Parabéns, você preencheu todos os campos obrigatórios!!!')
+    // function handleINputIdadeChange(event) {
+    //     setFormValues({ ...formValues, idade: event.target.value });
+    //     if (formValues.idade !== '') {
+    //         validadeForm();
+    //     }
+    // }
+
+    // function validadeForm(){
+    //     if (formValues.nome !== '' && formValues.email !== '' && formValues.idade !== '') {
+    //         alert('Parabéns, você preencheu todos os campos obrigatórios!!!')
+    //     }
+    // }
+
+    useEffect(() => {
+        const values = Object.values(formValues)
+        const check = values.reduce((acumulator, currentValue) => {
+            if (valor) {
+                acumulator += 1
+            }
+            return acumulator
+        }, 0)
+        if (check === 2) {
+            setMensage('Parabéns, você preencheu todos os campos obrigatórios!!!')
         }
-    }
+    }, [formValues])
 
     return (
         <div>
@@ -45,7 +60,12 @@ function Form() {
                     <input
                         type="text"
                         value={formValues.nome}
-                        onChange={handleINputNameChange}
+                        onChange={event => {
+                            setFormValues(prevState => ({
+                                ...prevState,
+                                nome: event.target.value
+                            }))
+                        }}
                     />
                 </label>
                 <br />
@@ -54,7 +74,12 @@ function Form() {
                     <input
                         type="email"
                         value={formValues.email}
-                        onChange={handleINputEmailChange}
+                        onChange={event => {
+                            setFormValues(prevState => ({
+                                ...prevState,
+                                email: event.target.value
+                            }))
+                        }}
                     />
                 </label>
                 <br />
@@ -63,7 +88,12 @@ function Form() {
                     <input
                         type="number"
                         value={formValues.idade}
-                        onChange={handleINputIdadeChange}
+                        onChange={event => {
+                            setFormValues(prevState => ({
+                                ...prevState,
+                                idade: event.target.value
+                            }))
+                        }}
                     />
                 </label>
             </form>
