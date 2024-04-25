@@ -10,43 +10,14 @@ function Form() {
 
     const [mensage, setMensage] = useState("Preencha todos os campos")
 
-    // function handleINputNameChange(event) {
-    //     setFormValues({ ...formValues, nome: event.target.value });
-    //     if (formValues.nome !== '') {
-    //         validadeForm();
-    //     }
-    // }
-
-    // function handleINputEmailChange(event) {
-    //     setFormValues({ ...formValues, email: event.target.value });
-    //     if (formValues.nome !== '') {
-    //         validadeForm();
-    //     }
-    // }
-
-    // function handleINputIdadeChange(event) {
-    //     setFormValues({ ...formValues, idade: event.target.value });
-    //     if (formValues.idade !== '') {
-    //         validadeForm();
-    //     }
-    // }
-
-    // function validadeForm(){
-    //     if (formValues.nome !== '' && formValues.email !== '' && formValues.idade !== '') {
-    //         alert('Parabéns, você preencheu todos os campos obrigatórios!!!')
-    //     }
-    // }
-
     useEffect(() => {
         const values = Object.values(formValues)
-        const check = values.reduce((acumulator, currentValue) => {
-            if (valor) {
-                acumulator += 1
-            }
-            return acumulator
-        }, 0)
-        if (check === 2) {
+        const check = values.filter((value) => value !== "").length === 3;
+
+        if (check) {
             setMensage('Parabéns, você preencheu todos os campos obrigatórios!!!')
+        } else {
+            setMensage("Preencha todos os campos")
         }
     }, [formValues])
 
@@ -96,6 +67,7 @@ function Form() {
                         }}
                     />
                 </label>
+                <h3>{mensage}</h3>
             </form>
         </div>
     );
