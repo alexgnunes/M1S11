@@ -4,6 +4,7 @@ import Input from "./components/Input"
 import ImportNews from "./components/ImportNews"
 import InputControl from "./components/InputControl"
 import Form from './components/Form'
+import InputControlado from './components/InputControlado'
 
 function App() {
   const [contador, setContador] = useState(0)
@@ -36,6 +37,9 @@ function App() {
 
       <div>
         <Form />
+      </div>
+      <div>
+        <InputControlado />
       </div>
     </>
   )
